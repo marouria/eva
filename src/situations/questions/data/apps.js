@@ -69,6 +69,6 @@ const illustrationsQuestions = {
 
 const audioQuestions = {
   bienvenue_1: bienvenueConcentrationQuestion
-}
+};
 
 export { illustrationsQuestions, audioQuestions };

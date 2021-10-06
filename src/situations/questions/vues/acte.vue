@@ -11,7 +11,6 @@
       >
         <bouton-son
           class="bouton-son"
-          :idQuestion="questionCourante.id"
           :question="questionCourante"
         />
         <div class="question-progression">
