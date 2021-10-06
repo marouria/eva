@@ -25,6 +25,14 @@
   }
 
   &-entete {
+    display: flex;
+    .entete-audio {
+      margin-right: 1rem;
+    }
+    button {
+      padding: 0;
+      background: none;
+    }
     p {
       margin: 0;
     }

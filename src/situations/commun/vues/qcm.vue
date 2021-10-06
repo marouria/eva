@@ -11,9 +11,20 @@
     >
       <slot />
       <div class="question-entete">
-        <p v-if="question.description">{{ question.description }}</p>
-        <p class="question-intitule">{{ question.intitule }}</p>
-        <p v-if="question.consigne">{{ question.consigne }}</p>
+        <div
+          v-if="afficheLectureQuestion"
+          class="entete-audio"
+        >
+          <bouton-lecture
+            class="bouton-lecture"
+            :idQuestion="question.nom_technique"
+          />
+        </div>
+        <div class="entete-questions">
+          <p v-if="question.description">{{ question.description }}</p>
+          <p class="question-intitule">{{ question.intitule }}</p>
+          <p v-if="question.consigne">{{ question.consigne }}</p>
+        </div>
       </div>
       <div class="question-contenu">
         <div
@@ -87,10 +98,11 @@ import 'commun/styles/formulaire_qcm.scss';
 
 import LecteurAudio from './lecteur_audio';
 import Question from './question';
+import BoutonLecture from 'commun/vues/bouton-lecture';
 import EvenementAffichageQuestionQCM from 'commun/modeles/evenement_affichage_question_qcm';
 
 export default {
-  components: { LecteurAudio, Question },
+  components: { LecteurAudio, Question, BoutonLecture },
 
   props: {
     question: {
@@ -136,6 +148,9 @@ export default {
         donneesReponse = { reponse: choix.id, succes: choix.bonneReponse };
       }
       return donneesReponse;
+    },
+    afficheLectureQuestion () {
+      return this.$depotRessources.existeMessageAudio(this.question.nom_technique);
     }
   },
 
