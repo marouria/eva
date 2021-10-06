@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import queryString from 'query-string';
 import 'accueil/styles/accueil.scss';
 import 'commun/styles/cadre.scss';
@@ -194,6 +194,9 @@ export default {
   },
 
   mounted () {
+    if(this.forceCampagne) {
+      this.deconnecte();
+    }
     this.recupereSituations();
   },
 
@@ -213,6 +216,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(['deconnecte']),
+
     recupereSituations (syncIndexBatiment = true) {
       if (!this.estConnecte) return;
       this.$store.dispatch('recupereSituations')

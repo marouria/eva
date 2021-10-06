@@ -40,6 +40,8 @@ describe('La vue accueil', function () {
         etat: DECONNECTE
       }
     });
+    store.dispatch = () => Promise.resolve();
+
     localVue = createLocalVue();
     localVue.prototype.$depotRessources = depotRessources;
     localVue.prototype.$traduction = traduction;
@@ -105,6 +107,19 @@ describe('La vue accueil', function () {
       shallowMount(Accueil, {
         localVue,
         store
+      });
+    });
+
+    it("déconnecte si un code campagne est passé dans l'url", function (done) {
+      store.state.estConnecte = true;
+      const wrapper = shallowMount(Accueil, {
+        localVue,
+        store
+      });
+      wrapper.vm.forceCampagne = 'CODECAMPAGNE';
+      wrapper.vm.$nextTick(() => {
+        expect(store.state.estConnecte).toEqual(false);
+        done();
       });
     });
 
