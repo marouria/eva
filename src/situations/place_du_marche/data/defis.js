@@ -1,0 +1,4 @@
+const configurationNormale = {
+};
+
+export { configurationNormale };
